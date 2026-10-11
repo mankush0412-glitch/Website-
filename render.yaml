@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: next-level-notes
+    runtime: node
+    plan: free
+    domains:
+      - nxtlevellive.xyz
+      - www.nxtlevellive.xyz
+    buildCommand: pnpm install --frozen-lockfile && npm --prefix e-com-main/backend install && PORT=21536 BASE_PATH=/ NODE_ENV=production pnpm --filter @workspace/next-level-notes run build:render
+    startCommand: npm --prefix e-com-main/backend start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: HOST
+        value: 0.0.0.0
+      - key: MONGODB_URI
+        sync: false
+      - key: MONGODB_DB
+        value: next_level_notes
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: FRONTEND_ORIGINS
+        value: https://nxtlevellive.xyz,https://www.nxtlevellive.xyz,https://next-level-notes.onrender.com
+      - key: PRIVATE_PRODUCT_DIR
+        value: /opt/render/project/src/e-com-main/private_storage/products
