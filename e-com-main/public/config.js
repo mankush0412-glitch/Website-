@@ -1,0 +1,4 @@
+window.TEAM_SECRET_CONFIG = window.TEAM_SECRET_CONFIG || {
+  API_BASE_URL: "",
+  GOOGLE_CLIENT_ID: "",
+};
